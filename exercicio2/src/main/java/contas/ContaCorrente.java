@@ -16,6 +16,16 @@ public class ContaCorrente extends Conta {
     // Constante só desta subclasse: R$ 0,50 cobrados por saque.
     private static final double TAXA_SAQUE = 0.50;
 
+    @Override
+    public String tipoDeConta() {
+        return ("Conta Corrente");
+    };
+
+    @Override
+    public String moeda() {
+        return ("R$");
+    };
+
     // >>> OBJETO + HERANÇA: construtor NÃO se herda. Se ContaCorrente não declarasse o dela,
     // não existiria "new ContaCorrente(titular, numero)" -- é a única exceção ao "herda tudo".
     public ContaCorrente(String titular, String numero) {

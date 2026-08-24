@@ -15,6 +15,16 @@ public class ContaPoupanca extends Conta {
     // Constante só desta subclasse: 0,5% ao mês (regra fictícia da aula).
     private static final double RENDIMENTO_MENSAL = 0.005;
 
+    @Override
+    public String tipoDeConta() {
+        return ("Poupança");
+    };
+
+    @Override
+    public String moeda() {
+        return ("R$");
+    };
+
     // >>> OBJETO + HERANÇA: construtor NÃO se herda; cada classe declara o seu.
     public ContaPoupanca(String titular, String numero) {
 

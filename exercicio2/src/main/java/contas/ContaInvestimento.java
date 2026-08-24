@@ -40,6 +40,19 @@ package contas;
 // >>> HERANÇA: ContaInvestimento É uma Conta -- por enquanto, só isso.
 public class ContaInvestimento extends Conta {
 
+    private static final double ALIQUOTA_IR = 0.225;
+    private double totalAplicado;
+
+    @Override
+    public String tipoDeConta() {
+        return ("Investimento");
+    };
+
+    @Override
+    public String moeda() {
+        return ("R$");
+    };
+
     // >>> OBJETO + HERANÇA: construtor não se herda; só repassa para a mãe.
     public ContaInvestimento(String titular, String numero) {
 
@@ -47,6 +60,22 @@ public class ContaInvestimento extends Conta {
         super(titular, numero);
 
     // Fim do construtor.
+    }
+
+    @Override
+    public void depositar(double valor){
+        totalAplicado += valor;
+        super.depositar(valor, "Depósito");
+    }
+
+    @Override
+    public double calcularImposto(){
+        return (getSaldo() - totalAplicado) * ALIQUOTA_IR;
+    }
+
+    public void aplicarRendimento(double percentual){
+        depositar(getSaldo() + (getSaldo() * percentual), "Aplicação " + percentual + " a.m.");
+        calcularImposto();
     }
 
 // Fim da classe ContaInvestimento.

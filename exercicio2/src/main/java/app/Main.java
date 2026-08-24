@@ -89,10 +89,7 @@ package app;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import contas.Conta;
-import contas.ContaCorrente;
-import contas.ContaPoupanca;
-import contas.ContaEstrangeira;
+import contas.*;
 import investimentos.Acao;
 import tributaveis.Tributavel;
 
@@ -135,6 +132,10 @@ public class Main {
 
         System.out.println(ccNatan);
         System.out.println(ceNatan);
+
+        ContaInvestimento ciNatan = new ContaInvestimento("Natan", "1234-5");
+        ciNatan.depositar(1000);
+        ciNatan.aplicarRendimento(0.10);
 
         // Cria uma ContaPoupanca (também subclasse de contas.Conta).
         // Outro objeto, com memória separada da conta acima.

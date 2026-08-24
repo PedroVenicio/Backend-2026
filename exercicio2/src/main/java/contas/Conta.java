@@ -89,6 +89,9 @@ public abstract class Conta implements Tributavel {
     // Fim do construtor.
     }
 
+    public abstract String tipoDeConta();
+    public abstract String moeda();
+
     // ---------------------------------------------------------------- métodos de negócio
 
     // Versão simples de depositar: é a única que o Main enxerga.
@@ -154,7 +157,7 @@ public abstract class Conta implements Tributavel {
     }
 
     public boolean transferir(Conta destino, double valor) {
-        return transferir(destino, valor, "Transferência entre contas");
+        return transferir(destino, valor, "Transferência");
     }
 
     protected boolean transferir(Conta destino, double valor, String descricao) {
@@ -277,13 +280,13 @@ public abstract class Conta implements Tributavel {
         // >>> POLIMORFISMO visível na tela: getClass().getSimpleName() devolve o nome da classe
         // REAL do objeto, decidido em tempo de execução. Este código está escrito dentro de
         // Conta, mas imprime "ContaCorrente" ou "ContaPoupanca", conforme quem chamou.
-        extrato += "Conta   : " + this.numero + "  (" + getClass().getSimpleName() + ")\n";
+        extrato += "Conta   : " + this.numero + "  (" + tipoDeConta() + ")\n";
 
         // Linha simples separa o cabeçalho dos lançamentos.
         extrato += "-".repeat(LARGURA) + "\n";
 
         // Cabeçalho das colunas, alinhado com o mesmo esquema usado em linha().
-        extrato += String.format("%-28s %16s", "DESCRIÇÃO", "VALOR " + (getClass().getSimpleName().equals("ContaEstrangeira") ? "($)" : "(R$)")) + "\n";
+        extrato += String.format("%-28s %16s", "DESCRIÇÃO", "VALOR " + " (" + moeda() + ") ") + "\n";
 
         // for-each: percorre a lista do começo ao fim sem precisar de índice.
         for (String lancamento : this.lancamentos) {

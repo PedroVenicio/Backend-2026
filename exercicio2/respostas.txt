@@ -3,13 +3,42 @@ Repositório: https://github.com/PedroVenicio/Backend-2026
 
 --------------------------------------------------
 Exercício 1.1
-Pergunta: Por que "new Conta("Fulano", "0000-0")" para de compilar e
-          "new ContaCorrente(...)" continua funcionando?
+Pergunta: Por que "new Conta("Fulano", "0000-0")" para de compilar e "new ContaCorrente(...)"  funcionando?
+
 Resposta: porque ao tentar criar um objeto (instanciar) de "Conta", o java não permite pois conta agora é abstrata, sendo apenas "um conceito", permitindo que subclasses herdem parâmetros e métodos, mas nunca que crie um objeto diretamente a partir dela.
 
 --------------------------------------------------
 Exercício 2.1
-Pergunta: O método transferir() tem três linhas e não sabe que a corrente
-          cobra taxa nem que a estrangeira converte moeda. Como as duas
-          regras foram aplicadas então? Qual conceito de POO está agindo aí?
-Resposta: 
+Pergunta: O método transferir() tem três linhas e não sabe que a corrente cobra taxa nem que a estrangeira converte moeda. Como as duas regras foram aplicadas então? Qual conceito de POO está agindo aí?
+
+Resposta: O conceito de OOP é o polimorfismo. Basicamente, ao chamar o método transferir com um objeto instanciado da conta corrente ou estrangeira, o Java sabe se há um método sobrescrevendo o transferir do pai, dessa forma utilizando o método do filho. Caso não tenha nada sobrescrevendo, é utilizado o método do pai.
+
+--------------------------------------------------
+Exercício 2.2
+Pergunta: Por que getSaldoEmReais() devolveu 499.99999999999994 em vez de 500.00? (Dica: o valor voltou de uma divisão por 5,40.)
+
+Resposta: porque foi utilizado o "double" como tipo da variável, que possui leves incoerências em tratar valores decimais muito específicos
+
+--------------------------------------------------
+Exercício 2.3
+Pergunta:O cabeçalho do extrato diz VALOR (R$), mas os valores da ContaEstrangeira são dólares. Como você consertaria isso sem copiar o toString() inteiro para a subclasse?
+
+Resposta: Seria possível fazer uma verificação de tipo da conta na saída do cabeçalho
+
+--------------------------------------------------
+Exercício 2.4
+Pergunta:A transferência de R$ 99.999,00 foi recusada e o saldo ficou intacto. Que atributo garantiu isso, e por que o Main não conseguiu forçar?
+
+Resposta: Com uma verificação no método de transferir que confere se o saque da conta de origem retorna true ou false. Caso retorne true, prossegue a depositar na conta destino, caso contráro, para a execução do método
+
+--------------------------------------------------
+Exercício 3.1
+Pergunta:A transferência de R$ 99.999,00 foi recusada e o saldo ficou intacto. Que atributo garantiu isso, e por que o Main não conseguiu forçar?
+
+Resposta: Com uma verificação no método de transferir que confere se o saque da conta de origem retorna true ou false. Caso retorne true, prossegue a depositar na conta destino, caso contráro, para a execução do método
+
+
+
+
+
+

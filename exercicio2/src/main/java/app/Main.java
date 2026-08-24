@@ -92,6 +92,7 @@ import java.util.Locale;
 import contas.Conta;
 import contas.ContaCorrente;
 import contas.ContaPoupanca;
+import contas.ContaEstrangeira;
 import investimentos.Acao;
 import tributaveis.Tributavel;
 
@@ -121,9 +122,19 @@ public class Main {
         // um estado inválido. Compare com a versão antiga, que era "new" mais três setters.
         ContaCorrente ccNatan = new ContaCorrente("Natan", "1234-5");
 
-        // Saldo: 1000.00 -- e já entra a primeira linha do extrato.
         ccNatan.depositar(1000);
-        ccNatan.depositar(999999);
+        ccNatan.sacar(100);
+
+        ContaEstrangeira ceNatan = new ContaEstrangeira("Natan", "9999-9");
+        ccNatan.transferir(ceNatan, 500);
+
+        ceNatan.getSaldoEmReais();
+        boolean transferencia = ccNatan.transferir(ceNatan, 99999);
+        System.out.println(">> Transferência de R$ 99.999,00 na conta " + ccNatan.getNumero()
+                + (transferencia ? " AUTORIZADO" : " RECUSADO (saldo insuficiente)"));
+
+        System.out.println(ccNatan);
+        System.out.println(ceNatan);
 
         // Cria uma ContaPoupanca (também subclasse de contas.Conta).
         // Outro objeto, com memória separada da conta acima.
@@ -171,7 +182,7 @@ public class Main {
 
         // Hoje esta linha compila. Depois que Conta virar abstract, vira erro de compilação --
         // e repare que os argumentos estão certos: o problema não é o construtor, é o "new".
-        Conta contaGenerica = new Conta("Fulano", "0000-0");
+//        Conta contaGenerica = new Conta("Fulano", "0000-0");
 
         // Polimorfismo puro: a variável é do tipo Conta, mas cada objeto aplica a SUA regra.
         // Linha separadora.

@@ -153,6 +153,21 @@ public abstract class Conta implements Tributavel {
     // Fim de sacar(double, String).
     }
 
+    public boolean transferir(Conta destino, double valor) {
+        return transferir(destino, valor, "Transferência entre contas");
+    }
+
+    protected boolean transferir(Conta destino, double valor, String descricao) {
+        boolean saque = sacar(valor);
+        if (!saque) {
+            return false;
+        }
+
+        destino.depositar(valor);
+        registrar(descricao, valor);
+        return true;
+    }
+
     // >>> INTERFACE: este é o método exigido pelo contrato Tributavel. Sem ele, a classe
     // nem compila. @Override avisa o compilador que estou cumprindo o contrato, e com isso
     // um erro de digitação no nome do método vira erro em vez de método novo e inútil.
@@ -268,7 +283,7 @@ public abstract class Conta implements Tributavel {
         extrato += "-".repeat(LARGURA) + "\n";
 
         // Cabeçalho das colunas, alinhado com o mesmo esquema usado em linha().
-        extrato += String.format("%-28s %16s", "DESCRIÇÃO", "VALOR (R$)") + "\n";
+        extrato += String.format("%-28s %16s", "DESCRIÇÃO", "VALOR " + (getClass().getSimpleName().equals("ContaEstrangeira") ? "($)" : "(R$)")) + "\n";
 
         // for-each: percorre a lista do começo ao fim sem precisar de índice.
         for (String lancamento : this.lancamentos) {

@@ -1,0 +1,20 @@
+Nome: Pedro Venicio Vassoler Schimitez
+Repositório: https://github.com/PedroVenicio/Backend-2026
+
+--------------------------------------------------
+Exercício 1.1
+Pergunta: Hoje, ciNatan.aplicarRendimento(-0.10) não trava e não avisa nada — o saldo continua igual e nenhuma linha aparece no extrato. Por que isso é pior do que lançar uma exceção?
+
+Resposta: é ruim pois mesmo que não faça nenhuma ação, é necessário um retorno para que o usuário saiba o que está acontecendo e facilita testes
+
+--------------------------------------------------
+Exercício 1.2
+Pergunta: Por que faz mais sentido validar dentro de aplicarRendimento() do que dentro de Conta.depositar(), que já existe e já é chamado por todo depósito do projeto?
+
+Resposta: Conta.depositar() já possui uma validação de valor negativos, porém tratando a exceção dentro de "aplicar rendimento", é possível especificar a mensagem de retorno, facilitando pra achar o que causou a exception
+
+--------------------------------------------------
+Exercício 1.2
+Pergunta: Se aplicarRendimento() capturasse a própria exceção com um try/catch dentro dele mesmo, o que mudaria para quem chama o método? Por que isso anularia o propósito do exercício?
+
+Resposta: a exception aconteceria dentro do método e quem chama o método não teria nenhuma resposta, pois o aplicar rendimento é um método void (não retorna nada). O chamador continuaria sem receber nenhum aviso de exceção
